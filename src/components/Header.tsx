@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, logout } from "../features/user/userSlice";
+import { useAuth0 } from "@auth0/auth0-react";
+import LogIn from "./LogIn";
+import Logout from "./Logout";
 
 export default function Header() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.value);
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <div className="">
@@ -17,15 +21,9 @@ export default function Header() {
           dashboard
         </Link>
         <div className="flex items-center">
-          <a className="bg-black rounded-xl text-white cursor-pointer">
-            <div className="p-3" onClick={() => dispatch(login())}>
-              sign in
-            </div>
-          </a>
+          <LogIn />
           <a className="mx-3 bg-red-500 rounded-xl text-white cursor-pointer">
-            <div className="p-3" onClick={() => dispatch(logout())}>
-              log out
-            </div>
+            <Logout />
           </a>
         </div>
       </div>
