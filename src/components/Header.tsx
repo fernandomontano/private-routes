@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, logout } from "../features/user/userSlice";
 
 export default function Header() {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.value);
 
   return (
     <div className="">
       <div className="flex justify-between font-bold items-center">
-        <Link to="/" className="text-3xl">
-          user
+        <Link to="/" className="text-3xl lowercase">
+          {user.name || "user"}
         </Link>
         <Link to="dashboard" className="">
           dashboard
