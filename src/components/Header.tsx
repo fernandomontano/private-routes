@@ -8,23 +8,31 @@ import Logout from "./Logout";
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user.value);
-  const { loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading }: any = useAuth0();
+
+  console.log(isAuthenticated);
+  console.log(user);
 
   return (
     <div className="">
       <div className="flex justify-between font-bold items-center">
-        <Link to="/" className="text-3xl lowercase">
-          {user.name || "user"}
+        <Link to="/" className="text-2xl lowercase flex items-center gap-5">
+          {!user ? <div>user</div> : <div>{user.nickname}</div>}
+          <div className="flex items-center">
+            {!user ? (
+              <></>
+            ) : (
+              <div>
+                <img className="rounded-full w-10" src={user.picture}></img>
+              </div>
+            )}
+          </div>
         </Link>
         <Link to="dashboard" className="">
           dashboard
         </Link>
         <div className="flex items-center">
-          <LogIn />
-          <a className="mx-3 bg-red-500 rounded-xl text-white cursor-pointer">
-            <Logout />
-          </a>
+          {isAuthenticated ? <Logout /> : <LogIn />}
         </div>
       </div>
       <Outlet />

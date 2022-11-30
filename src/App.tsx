@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { login, logout } from "./features/user/userSlice";
 
 function App() {
   const value = useAppSelector((state) => state.user.value);
