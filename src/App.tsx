@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
@@ -9,18 +9,13 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 function App() {
   const value = useAppSelector((state) => state.user.value);
   return (
-    <div className="font-inter px-2 xl:px-40 py-8 min-h-screen bg-orange-200/20">
+    <div className="font-inter py-4 min-h-screen bg-orange-200/10">
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />}></Route>
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute user={value.isOnline}>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Route>
       </Routes>
     </div>

@@ -6,10 +6,10 @@ export default function LogIn() {
 
   return (
     <button
-      className="bg-black rounded-xl text-white cursor-pointer p-3"
+      className="bg-emerald-500/40 rounded-xl text-white cursor-pointer p-3"
       onClick={() => loginWithRedirect()}
     >
-      sign in
+      login
     </button>
   );
 }

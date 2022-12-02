@@ -1,8 +1,11 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function ProtectedRoute({ user, children }: any) {
-  if (!user) return <Navigate to="/" replace />;
+  const { isAuthenticated } = useAuth0();
 
-  return children;
+  if (!isAuthenticated) return <Navigate to="/" replace />;
+
+  return <Outlet />;
 }

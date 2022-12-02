@@ -5,14 +5,14 @@ export default function Logout() {
   const { logout } = useAuth0();
   return (
     <button
-      className="mx-3 bg-red-500 rounded-xl text-white cursor-pointer"
+      className="mx-3 bg-orange-200/70 rounded-xl text-black cursor-pointer"
       onClick={() =>
         logout({
           returnTo: window.location.origin,
         })
       }
     >
-      <p className="p-3">log out</p>
+      <p className="p-3">logout</p>
     </button>
   );
 }
