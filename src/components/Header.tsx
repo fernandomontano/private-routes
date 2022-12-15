@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, json } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, logout } from "../features/user/userSlice";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogIn from "./LogIn";
 import Logout from "./Logout";
+import * as UserFeatures from "../api/User";
+interface User {
+  name: string;
+  email: string;
+  token: string;
+}
 
 export default function Header() {
-  const { user, isAuthenticated, isLoading }: any = useAuth0();
+  const [userData, setUserData] = useState();
+  const { user, isAuthenticated }: any = useAuth0();
+
+  useEffect(() => {
+    user && createUser(user.nickname, user.email, user.sub);
+  }, [user]);
+
+  console.log(userData);
 
   return (
     <div className="fixed w-screen px-2 lg:px-20">
@@ -35,4 +48,8 @@ export default function Header() {
       <Outlet />
     </div>
   );
+}
+
+function createUser(name: string, email: string, token: string) {
+  const response = UserFeatures.postUser(name, email, token);
 }
