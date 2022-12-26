@@ -13,6 +13,7 @@ export const postUser = async (name: string, email: string, token: string) => {
   });
   return response.json();
 };
+
 export const getSingleUser = async (token: string) => {
   const response = await fetch(
     `${import.meta.env.VITE_SERVER_URL}/users/${token}`
