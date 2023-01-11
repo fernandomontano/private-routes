@@ -7,7 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div className="font-inter py-4 min-h-screen bg-orange-200/10">
+    <div className="font-inter min-h-screen bg-orange-200/20">
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />}></Route>
